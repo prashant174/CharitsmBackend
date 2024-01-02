@@ -13,9 +13,9 @@ const authenticate=async(req,res,next)=>{
         const decoded=jwt.verify(token,process.env.SECRET_KEY)
 
         if(!decoded){
-            return req.status(401).send({msg:"not authorized please login first"})
+            return req.status(401).send({msg:"not authorized "})
         }
-
+        req.body.userId = decoded.userId
         next()
 
     }catch(err){
