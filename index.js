@@ -1,14 +1,23 @@
 const express=require("express")
+const bodyParser=require("body-parser")
+const jwt=require("jsonwebtoken")
+const rateLimit=require("express-rate-limit")
 const { userRouter } = require("./routes/userRoutes")
 const { connection } = require("./config/db")
-const { authenticate } = require("./middleware/authentication")
 const { todoRouter } = require("./routes/todoRoutes")
 const app=express()
 require("dotenv").config()
-app.use(express.json())
 
-app.get("/",authenticate,(req,res)=>{
-    res.status(200).send("charitsm")
+
+app.use(bodyParser.json())
+app.use(express.json())
+app.use(rateLimit({
+    windowMs:1*60*100,
+    max:10,
+}))
+
+app.get("/",(req,res)=>{
+    res.status(200).send("<h1>Charitism Backend Assigment By Prashant</h1>")
 })
 
 app.use("/",userRouter)
