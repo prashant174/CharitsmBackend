@@ -74,7 +74,7 @@ const deleteTodo=async(req,res)=>{
        }
    
        const updatedTodo = await Todo.findByIdAndDelete(id)
-       res.status(200).send({msg:"Todo Deleted successfully"});
+       res.status(200).send({msg:"Todo updated successfully"});
 
     }catch(err){
         res.status(500).send({msg:"Something went wrong please try again later"})

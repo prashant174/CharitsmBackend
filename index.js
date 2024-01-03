@@ -2,6 +2,8 @@ const express=require("express")
 const bodyParser=require("body-parser")
 const jwt=require("jsonwebtoken")
 const rateLimit=require("express-rate-limit")
+const morgan=require("morgan")
+const helmet=require("helmet")
 const { userRouter } = require("./routes/userRoutes")
 const { connection } = require("./config/db")
 const { todoRouter } = require("./routes/todoRoutes")
@@ -15,6 +17,10 @@ app.use(rateLimit({
     windowMs:1*60*100,
     max:10,
 }))
+
+
+app.use(morgan('combined'))
+app.use(helmet())
 
 app.get("/",(req,res)=>{
     res.status(200).send("<h1>Charitism Backend Assigment By Prashant</h1>")
